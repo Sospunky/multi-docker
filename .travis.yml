@@ -15,4 +15,11 @@ after_success:
   - docker build -t sassyg/multi-client ./server
   - docker build -t sassyg/multi-client ./worker
   
+#Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u $"DOCKER_ID" --password-stdin
 
+# Take those images and push them to docker hub
+  - docker push sassgy/multi-client
+  - docker push sassgy/multi-nginx
+  - docker push sassgy/multi-server
+  - docker push sassgy/multi-worker
