@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sassyg/react-test -f ./client/Dockerfile.dev ./client
+
+
+script:
+  - docker run -e CI=true sassyg/react-test npm test
+
+after_success: 
+  - docker build -t sassyg/multi-client ./client
+  - docker build -t sassyg/multi-client ./nginx
+  - docker build -t sassyg/multi-client ./server
+  - docker build -t sassyg/multi-client ./worker
+  
+
