@@ -23,3 +23,7 @@ after_success:
   - docker push sassgy/multi-nginx
   - docker push sassgy/multi-server
   - docker push sassgy/multi-worker
+
+#Test 
+
+  
