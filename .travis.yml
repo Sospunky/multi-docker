@@ -1,19 +1,20 @@
 sudo: required
+language: generic
+
 services:
   - docker
 
 before_install:
-  - docker build -t sassyg/react-test -f ./client/Dockerfile.dev ./client
-
+  - docker build -t sospunky/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true sassyg/react-test npm run test
+  - docker run -e CI=true sospunky/react-test npm test
 
 after_success: 
   - docker build -t sospunky/multi-client ./client
-  - docker build -t sospunky/multi-client ./nginx
-  - docker build -t sospunky/multi-client ./server
-  - docker build -t sospunky/multi-client ./worker
+  - docker build -t sospunky/multi-nginx ./nginx
+  - docker build -t sospunky/multi-server ./server
+  - docker build -t sospunky/multi-worker ./worker
   
 #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u $"DOCKER_ID" --password-stdin
