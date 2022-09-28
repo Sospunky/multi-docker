@@ -19,10 +19,10 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u $"DOCKER_ID" --password-stdin
 
 # Take those images and push them to docker hub
-  - docker push Sospunky/multi-client
-  - docker push Sospunky/multi-nginx
-  - docker push Sospunky/multi-server
-  - docker push Sospunky/multi-worker
+  - docker push sospunky/multi-client
+  - docker push sospunky/multi-nginx
+  - docker push sospunky/multi-server
+  - docker push sospunky/multi-worker
 
 #Test 
 
