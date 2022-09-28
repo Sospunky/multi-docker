@@ -10,10 +10,10 @@ script:
   - docker run -e CI=true sassyg/react-test npm run test
 
 after_success: 
-  - docker build -t sassyg/multi-client ./client
-  - docker build -t sassyg/multi-client ./nginx
-  - docker build -t sassyg/multi-client ./server
-  - docker build -t sassyg/multi-client ./worker
+  - docker build -t sospunky/multi-client ./client
+  - docker build -t sospunky/multi-client ./nginx
+  - docker build -t sospunky/multi-client ./server
+  - docker build -t sospunky/multi-client ./worker
   
 #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u $"DOCKER_ID" --password-stdin
