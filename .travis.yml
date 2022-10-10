@@ -10,23 +10,18 @@ before_install:
 script:
   - docker run -e CI=true sospunky/react-test npm test
 
-after_success: 
+after_success:
   - docker build -t sospunky/multi-client ./client
   - docker build -t sospunky/multi-nginx ./nginx
   - docker build -t sospunky/multi-server ./server
   - docker build -t sospunky/multi-worker ./worker
-  
-#Log in to the docker CLI
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-# Take those images and push them to docker hub
+  # Take those images and push them to docker hub
   - docker push sospunky/multi-client
   - docker push sospunky/multi-nginx
   - docker push sospunky/multi-server
   - docker push sospunky/multi-worker
-
-#Test 
-
 
 deploy:
   provider: elasticbeanstalk
@@ -36,10 +31,6 @@ deploy:
   bucket_name: 'elasticbeanstalk-us-east-1-951000987587'
   bucket_path: 'docker-multi'
   on:
-    branch: master
+    branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  skip_cleanup: true
-
-
-  
